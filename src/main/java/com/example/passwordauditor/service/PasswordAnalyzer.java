@@ -15,9 +15,9 @@ public class PasswordAnalyzer {
 
         if(password.length()<6){
             listOfIssues.add("Password is too short");
-        }else if(password.length()>12){
+        }else if(password.length()>11){
             score += 25;
-            listOfIssues.add("Password is long enough");
+            listOfStrengths.add("Password is long enough");
         }else {
             score += 15;
         }

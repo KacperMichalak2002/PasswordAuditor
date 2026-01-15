@@ -4,6 +4,7 @@ import com.example.passwordauditor.model.PasswordAnalysis;
 import com.example.passwordauditor.service.PasswordAnalyzer;
 import javafx.fxml.FXML;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -52,6 +53,9 @@ public class MainViewController {
         PasswordAnalysis passwordAnalysis = passwordAnalyzer.analyzePassword(password);
 
         updateProgressBar(passwordAnalysis);
+        updateAnalysis(passwordAnalysis);
+
+        analysisHBox.setVisible(true);
     }
 
     private void updateProgressBar(PasswordAnalysis passwordAnalysis){
@@ -84,10 +88,34 @@ public class MainViewController {
 
     }
 
+    private void updateAnalysis(PasswordAnalysis passwordAnalysis){
+        analysisVBox.getChildren().clear();
+
+        Label titleLabel = new Label("Password Analysis:");
+        analysisVBox.getChildren().add(titleLabel);
+
+        Label lengthLabel = new Label("Length: " + passwordAnalysis.getLength());
+        analysisVBox.getChildren().add(lengthLabel);
+
+        for(String info : passwordAnalysis.getListOfStrengths()){
+            Label infoLabel = new Label(info);
+            infoLabel.getStyleClass().add("strengthsLabel");
+            analysisVBox.getChildren().add(infoLabel);
+        }
+
+        for(String info : passwordAnalysis.getListOfIssues()){
+            Label infoLabel = new Label(info);
+            infoLabel.getStyleClass().add("issuesLabel");
+            analysisVBox.getChildren().add(infoLabel);
+        }
+    }
+
     private void resetUI(){
         progressBar.setProgress(0);
         passwordStrengthLabel.setText("Weak password 0%");
         passwordStrengthLabel.setTextFill(Color.web("#ffffff"));
+
+        analysisHBox.setVisible(false);
 
     }
 

@@ -13,8 +13,24 @@
 
 }
 
+.scroll-pane{
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal{
+    -fx-background-color: transparent;
+}
+
 .vBoxAnalysis{
     -fx-fontsize: 18px;
     -fxfontweight: bold;
-    -fx-text-fill: #202125;
+}
+
+.label.strengthsLabel{
+    -fx-text-fill: #3fd121;
+}
+
+.label.issuesLabel{
+    -fx-text-fill: #a12828;
 }
