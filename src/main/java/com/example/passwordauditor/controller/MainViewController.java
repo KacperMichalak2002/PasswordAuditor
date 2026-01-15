@@ -39,12 +39,16 @@ public class MainViewController {
 
     private void passwordInputListener(){
         passwordField.textProperty().addListener((observable, oldValue, newValue) ->{
-            System.out.println("AAA");
             handlePasswordChange(newValue);
         });
     }
 
     private void handlePasswordChange(String password){
+       if(password == null || password.isEmpty()){
+           resetUI();
+           return;
+       }
+
         PasswordAnalysis passwordAnalysis = passwordAnalyzer.analyzePassword(password);
 
         updateProgressBar(passwordAnalysis);
@@ -54,7 +58,6 @@ public class MainViewController {
 
         double score = passwordAnalysis.getScore();
         double scoreForProgressBar = score / 100;
-        System.out.println(scoreForProgressBar);
         progressBar.setProgress(scoreForProgressBar);
 
         String newLabel;
@@ -79,10 +82,14 @@ public class MainViewController {
         passwordStrengthLabel.setTextFill(Color.web(color));
         progressBar.setStyle("-fx-accent:" + barColor +";");
 
-
-
     }
 
+    private void resetUI(){
+        progressBar.setProgress(0);
+        passwordStrengthLabel.setText("Weak 0%");
+        passwordStrengthLabel.setTextFill(Color.web("#202125"));
+
+    }
 
 
 

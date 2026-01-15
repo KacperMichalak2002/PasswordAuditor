@@ -1,5 +1,6 @@
 .mainContainer{
 -fx-padding: 30px;
+    -fx-text-fill: #202125;
 }
 
 .mainTitle{
