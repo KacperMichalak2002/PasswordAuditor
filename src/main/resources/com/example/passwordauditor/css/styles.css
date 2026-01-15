@@ -1,0 +1,13 @@
+.mainContainer{
+-fx-padding: 30px;
+}
+
+.mainTitle{
+
+}
+
+.vBoxAnalysis{
+    -fx-fontsize: 16px;
+    -fxfontweight: bold;
+    -fx-text-fill: #202125;
+}

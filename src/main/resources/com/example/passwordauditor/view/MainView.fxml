@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20" styleClass="mainContainer" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.passwordauditor.controller.MainViewController">
+
+    <VBox alignment="CENTER" spacing="10" styleClass="mainTitle">
+        <Label text="Password Auditor" />
+        <Label text="Check your password's strength" />
+    </VBox>
+
+    <!-- Input -->
+    <VBox spacing="15" maxWidth="300">
+        <Label text="Input your password for analysis" />
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <PasswordField fx:id="passwordField" promptText="Input password" HBox.hgrow="ALWAYS" />
+        </HBox>
+
+        <VBox spacing="10" maxWidth="300">
+            <HBox>
+                <Label text="Password strength" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="passwordStrengthLabel" text="Weak 0%" />
+            </HBox>
+            <ProgressBar fx:id="progressBar" maxWidth="Infinity" progress="0" />
+        </VBox>
+    </VBox>
+
+    <!-- Analysis -->
+    <HBox fx:id="analysisHBox" alignment="CENTER" spacing="20">
+        <VBox fx:id="analysisVBox" spacing="15" styleClass="vBoxAnalysis" HBox.hgrow="ALWAYS" />
+        <VBox spacing="15" styleClass="vBoxAnalysis" HBox.hgrow="ALWAYS" />
+        <VBox spacing="15" styleClass="vBoxAnalysis" HBox.hgrow="ALWAYS" />
+    </HBox>
+
+
+</VBox>
