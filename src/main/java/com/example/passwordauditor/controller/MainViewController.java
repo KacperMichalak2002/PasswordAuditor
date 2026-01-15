@@ -1,10 +1,15 @@
 package com.example.passwordauditor.controller;
 
+import com.example.passwordauditor.model.PasswordAnalysis;
+import com.example.passwordauditor.service.PasswordAnalyzer;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
+import java.io.Console;
 
 
 public class MainViewController {
@@ -20,6 +25,65 @@ public class MainViewController {
     private HBox analysisHBox;
     @FXML
     private VBox analysisVBox;
+
+    private PasswordAnalyzer passwordAnalyzer;
+
+    @FXML
+    public void initialize(){
+        passwordAnalyzer = new PasswordAnalyzer();
+
+        passwordInputListener();
+
+        analysisHBox.setVisible(false);
+    }
+
+    private void passwordInputListener(){
+        passwordField.textProperty().addListener((observable, oldValue, newValue) ->{
+            System.out.println("AAA");
+            handlePasswordChange(newValue);
+        });
+    }
+
+    private void handlePasswordChange(String password){
+        PasswordAnalysis passwordAnalysis = passwordAnalyzer.analyzePassword(password);
+
+        updateProgressBar(passwordAnalysis);
+    }
+
+    private void updateProgressBar(PasswordAnalysis passwordAnalysis){
+
+        double score = passwordAnalysis.getScore();
+        double scoreForProgressBar = score / 100;
+        System.out.println(scoreForProgressBar);
+        progressBar.setProgress(scoreForProgressBar);
+
+        String newLabel;
+        String color;
+        String barColor;
+
+        if(score < 30){
+            newLabel = "Weak password " + score + "%";
+            color = "#a12828";
+            barColor = "#a12828";
+        }else if (score < 60){
+            newLabel = "Medium password " + score + "%";
+            color = "#edd626";
+            barColor = "#edd626";
+        }else{
+            newLabel = "Strong password " + score + "%";
+            color = "#3fd121";
+            barColor = "#3fd121";
+        }
+
+        passwordStrengthLabel.setText(newLabel);
+        passwordStrengthLabel.setTextFill(Color.web(color));
+        progressBar.setStyle("-fx-accent:" + barColor +";");
+
+
+
+    }
+
+
 
 
 

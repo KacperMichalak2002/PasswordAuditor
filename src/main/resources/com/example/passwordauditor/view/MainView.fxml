@@ -15,13 +15,13 @@
     </VBox>
 
     <!-- Input -->
-    <VBox spacing="15" maxWidth="300">
+    <VBox maxWidth="300" spacing="15">
         <Label text="Input your password for analysis" />
         <HBox alignment="CENTER_LEFT" spacing="10">
             <PasswordField fx:id="passwordField" promptText="Input password" HBox.hgrow="ALWAYS" />
         </HBox>
 
-        <VBox spacing="10" maxWidth="300">
+        <VBox maxWidth="300" spacing="10">
             <HBox>
                 <Label text="Password strength" />
                 <Region HBox.hgrow="ALWAYS" />

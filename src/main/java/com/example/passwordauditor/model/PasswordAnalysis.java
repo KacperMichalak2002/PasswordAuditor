@@ -3,19 +3,19 @@ package com.example.passwordauditor.model;
 import java.util.List;
 
 public class PasswordAnalysis {
-    private int score;
+    private double score;
     private int length;
     private List<String> listOfStrengths;
     private List<String> listOfIssues;
 
-    public PasswordAnalysis(int score, int length, List<String> listOfStrengths, List<String> listOfIssues){
+    public PasswordAnalysis(double score, int length, List<String> listOfStrengths, List<String> listOfIssues){
         this.score = score;
         this.length = length;
         this.listOfStrengths = listOfStrengths;
         this.listOfIssues = listOfIssues;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
