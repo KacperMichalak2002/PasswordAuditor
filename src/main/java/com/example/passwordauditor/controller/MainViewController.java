@@ -86,8 +86,8 @@ public class MainViewController {
 
     private void resetUI(){
         progressBar.setProgress(0);
-        passwordStrengthLabel.setText("Weak 0%");
-        passwordStrengthLabel.setTextFill(Color.web("#202125"));
+        passwordStrengthLabel.setText("Weak password 0%");
+        passwordStrengthLabel.setTextFill(Color.web("#ffffff"));
 
     }
 

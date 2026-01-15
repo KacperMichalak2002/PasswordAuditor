@@ -25,7 +25,7 @@
             <HBox>
                 <Label text="Password strength" />
                 <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="passwordStrengthLabel" text="Weak 0%" />
+                <Label fx:id="passwordStrengthLabel" text="Weak password 0%" />
             </HBox>
             <ProgressBar fx:id="progressBar" maxWidth="Infinity" progress="0" />
         </VBox>

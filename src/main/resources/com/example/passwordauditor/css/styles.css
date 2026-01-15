@@ -1,6 +1,12 @@
 .mainContainer{
--fx-padding: 30px;
-    -fx-text-fill: #202125;
+    -fx-padding: 30px;
+    -fx-background-color: #3B3B3B;
+
+}
+
+.mainContainer .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
 }
 
 .mainTitle{
@@ -8,7 +14,7 @@
 }
 
 .vBoxAnalysis{
-    -fx-fontsize: 16px;
+    -fx-fontsize: 18px;
     -fxfontweight: bold;
     -fx-text-fill: #202125;
 }
