@@ -35,7 +35,19 @@ public class SceneController {
         });
     }
 
-    public void switchToBruteForceView(ActionEvent event) throws IOException{
-        switchScene(event,"/com/example/passwordauditor/view/BruteForceWindow.fxml");
+    public void switchToBruteForceView(ActionEvent event, String password) throws IOException{
+
+        String fxmlFile = "/com/example/passwordauditor/view/BruteForceWindow.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        root = loader.load();
+
+        BruteForceController bruteForceController = loader.getController();
+        bruteForceController.setTargetPassword(password);
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        closeStage(stage);
+        stage.show();
     }
 }

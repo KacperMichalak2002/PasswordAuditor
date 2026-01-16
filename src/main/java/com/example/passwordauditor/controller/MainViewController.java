@@ -134,7 +134,7 @@ public class MainViewController {
     @FXML
     public void handleOpenNewWindowBruteForce(ActionEvent event){
         try{
-            sceneController.switchToBruteForceView(event);
+            sceneController.switchToBruteForceView(event,passwordField.getText());
         }catch (Exception e){
             e.printStackTrace();
         }
