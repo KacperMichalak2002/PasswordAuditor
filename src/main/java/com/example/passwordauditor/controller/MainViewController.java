@@ -2,6 +2,7 @@ package com.example.passwordauditor.controller;
 
 import com.example.passwordauditor.model.PasswordAnalysis;
 import com.example.passwordauditor.service.PasswordAnalyzer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.geometry.Pos;
@@ -15,6 +16,7 @@ import java.io.Console;
 
 public class MainViewController {
 
+    private  SceneController sceneController = new SceneController();
     @FXML
     private PasswordField passwordField;
 
@@ -26,6 +28,11 @@ public class MainViewController {
     private HBox analysisHBox;
     @FXML
     private VBox analysisVBox;
+    @FXML
+    private Button bruteForceButton;
+    @FXML
+    private Button dictionaryButton;
+    @FXML
 
     private PasswordAnalyzer passwordAnalyzer;
 
@@ -36,6 +43,8 @@ public class MainViewController {
         passwordInputListener();
 
         analysisHBox.setVisible(false);
+        bruteForceButton.setDisable(true);
+        dictionaryButton.setDisable(true);
     }
 
     private void passwordInputListener(){
@@ -56,6 +65,8 @@ public class MainViewController {
         updateAnalysis(passwordAnalysis);
 
         analysisHBox.setVisible(true);
+        bruteForceButton.setDisable(false);
+        dictionaryButton.setDisable(false);
     }
 
     private void updateProgressBar(PasswordAnalysis passwordAnalysis){
@@ -116,7 +127,17 @@ public class MainViewController {
         passwordStrengthLabel.setTextFill(Color.web("#ffffff"));
 
         analysisHBox.setVisible(false);
+        bruteForceButton.setDisable(true);
+        dictionaryButton.setDisable(true);
+    }
 
+    @FXML
+    public void handleOpenNewWindowBruteForce(ActionEvent event){
+        try{
+            sceneController.switchToBruteForceView(event);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

@@ -34,3 +34,9 @@
 .label.issuesLabel{
     -fx-text-fill: #a12828;
 }
+
+.buttons{
+    -fx-padding: 10px;
+}
+
+
