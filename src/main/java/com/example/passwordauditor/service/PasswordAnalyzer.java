@@ -2,8 +2,11 @@ package com.example.passwordauditor.service;
 
 import com.example.passwordauditor.model.PasswordAnalysis;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class PasswordAnalyzer {
@@ -12,6 +15,39 @@ public class PasswordAnalyzer {
     private static final Pattern UPPERCASE_PATTERN = Pattern.compile("[A-Z]");
     private static final Pattern DIGIT_PATTERN = Pattern.compile("[0-9]");
     private static final Pattern SPECIAL_CHARS_PATTERN = Pattern.compile("[ !@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]");
+
+    private Set<String> commonPasswords;
+
+
+    public PasswordAnalyzer(){
+        this.commonPasswords = new HashSet<String>();
+        loadCommonPasswordsFromFile();
+
+    }
+
+    private void loadCommonPasswordsFromFile() {
+
+        String path = "/com/example/passwordauditor/data/10k-most-common.txt";
+
+        try(InputStream inputStream = getClass().getResourceAsStream(path)){
+            if(inputStream == null){
+                System.err.println("Couldn't find file " + path);
+                return;
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))){
+                String line;
+                while((line = reader.readLine()) != null){
+                    commonPasswords.add(line);
+                }
+            }
+        }catch (IOException e){
+            System.err.println("Can't load common passwords file " + e.getMessage());
+            e.printStackTrace();
+        }
+
+
+
+    }
 
     public PasswordAnalysis analyzePassword(String password){
         int score = 0;
@@ -71,10 +107,22 @@ public class PasswordAnalyzer {
             listOfIssues.add(String.format("Very low entropy: %.0f bits", passwordEntropy));
         }
 
+        if(containsCommonPassword(password)){
+            score = 0;
+            listOfStrengths.clear();
+            listOfIssues.clear();
+            listOfIssues.add("Password contains common password");
+        }
 
         score = Math.max(0, Math.min(100,score));
 
         return new PasswordAnalysis(score,password.length(),passwordEntropy,listOfStrengths,listOfIssues);
+    }
+
+    private boolean containsCommonPassword(String password) {
+        String lowerCasePassword = password.toLowerCase();
+
+        return commonPasswords.contains(lowerCasePassword);
     }
 
     private double calculateEntropy(String password) {
