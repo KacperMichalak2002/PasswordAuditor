@@ -7,10 +7,12 @@ public class PasswordAnalysis {
     private int length;
     private List<String> listOfStrengths;
     private List<String> listOfIssues;
+    private double passwordEntropy;
 
-    public PasswordAnalysis(double score, int length, List<String> listOfStrengths, List<String> listOfIssues){
+    public PasswordAnalysis(double score, int length,double passwordEntropy ,List<String> listOfStrengths, List<String> listOfIssues){
         this.score = score;
         this.length = length;
+        this.passwordEntropy = passwordEntropy;
         this.listOfStrengths = listOfStrengths;
         this.listOfIssues = listOfIssues;
     }
@@ -30,6 +32,15 @@ public class PasswordAnalysis {
     public void setLength(int length) {
         this.length = length;
     }
+
+    public double getPasswordEntropy() {
+        return passwordEntropy;
+    }
+
+    public void setPasswordEntropy(double passwordEntropy) {
+        this.passwordEntropy = passwordEntropy;
+    }
+
 
     public List<String> getListOfStrengths() {
         return listOfStrengths;
