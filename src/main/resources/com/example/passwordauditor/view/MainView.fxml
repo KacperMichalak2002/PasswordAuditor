@@ -35,8 +35,8 @@
 
     <!-- Analysis -->
     <ScrollPane fitToWidth="true">
-        <HBox fx:id="analysisHBox" alignment="CENTER" spacing="20">
-            <VBox fx:id="analysisVBox" spacing="15" styleClass="vBoxAnalysis" HBox.hgrow="ALWAYS" />
+        <HBox fx:id="analysisHBox" alignment="CENTER" spacing="10">
+            <VBox fx:id="analysisVBox" spacing="10" styleClass="vBoxAnalysis" HBox.hgrow="ALWAYS" />
         </HBox>
     </ScrollPane>
 

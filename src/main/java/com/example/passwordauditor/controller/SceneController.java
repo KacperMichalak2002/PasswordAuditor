@@ -50,4 +50,8 @@ public class SceneController {
         closeStage(stage);
         stage.show();
     }
+
+    public void switchToMainView(ActionEvent event) throws IOException{
+        switchScene(event, "/com/example/passwordauditor/view/MainView.fxml");
+    }
 }
