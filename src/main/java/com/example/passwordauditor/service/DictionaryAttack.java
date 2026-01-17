@@ -1,10 +1,8 @@
 package com.example.passwordauditor.service;
 
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -12,6 +10,12 @@ public class DictionaryAttack extends Task<String> {
 
     private final String targetPassword;
     private long lineCounter = 0;
+
+    private static final String [] FILES = {
+            "10k-most-common.txt",
+            "100k-most-used-passwords-NCSC.txt",
+            "Polish-common-password-list.txt"
+    };
 
     public DictionaryAttack(String targetPassword){
         this.targetPassword = targetPassword;
@@ -22,13 +26,7 @@ public class DictionaryAttack extends Task<String> {
         long startTime = System.currentTimeMillis();
         updateMessage("Start...");
 
-        String [] files = {
-                "10k-most-common.txt",
-                "100k-most-used-passwords-NCSC.txt",
-                "Polish-common-password-list.txt"
-        };
-
-        for(String fileName : files){
+        for(String fileName : FILES){
             String path = "/com/example/passwordauditor/data/" + fileName;
 
             try(InputStream inputStream = getClass().getResourceAsStream(path)){
@@ -63,7 +61,6 @@ public class DictionaryAttack extends Task<String> {
                 return "Error reading file " + e.getMessage();
             }
         }
-
 
         return String.format("Password was not found \n Line read: %d",lineCounter);
     }

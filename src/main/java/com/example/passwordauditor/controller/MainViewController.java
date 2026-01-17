@@ -1,22 +1,22 @@
 package com.example.passwordauditor.controller;
 
 import com.example.passwordauditor.model.PasswordAnalysis;
+import com.example.passwordauditor.service.HIBPChecker;
 import com.example.passwordauditor.service.PasswordAnalyzer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import java.io.Console;
 
 
 public class MainViewController {
 
-    private  SceneController sceneController = new SceneController();
+    private static final SceneController sceneController = new SceneController();
     @FXML
     private PasswordField passwordField;
 
@@ -33,12 +33,15 @@ public class MainViewController {
     @FXML
     private Button dictionaryButton;
     @FXML
+    private Button checkButton;
 
     private PasswordAnalyzer passwordAnalyzer;
+    private HIBPChecker hibpChecker;
 
     @FXML
     public void initialize(){
         passwordAnalyzer = new PasswordAnalyzer();
+        hibpChecker = new HIBPChecker();
 
         passwordInputListener();
 
@@ -131,6 +134,14 @@ public class MainViewController {
         dictionaryButton.setDisable(true);
     }
 
+    private void showAlert(String title, String information) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(information);
+        alert.showAndWait();
+    }
+
     @FXML
     public void handleOpenNewWindowBruteForce(ActionEvent event){
         try{
@@ -147,6 +158,20 @@ public class MainViewController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void handleCheckButtonAction(){
+        hibpChecker.checkPasswordLeak(passwordField.getText()).thenAccept(leakCount ->{
+            Platform.runLater(() ->{
+                if(leakCount > 0){
+                    showAlert("Password Leaked",String.format("Password leaked %d times", leakCount));
+                }else if(leakCount == 0){
+                    showAlert("Safe","Password wasn't found");
+                }
+            });
+
+        });
     }
 
 

@@ -22,9 +22,9 @@
 
         <VBox maxWidth="600" spacing="10">
             <HBox alignment="CENTER" spacing="10">
-                <Button fx:id="startButton" onAction="#handleStart" text="Start" />
-                <Button fx:id="stopButton" onAction="#handleStop" text="Stop" />
-                <Button fx:id="backButton" onAction="#handleBackButton" text="Back" />
+                <Button fx:id="startButton" onAction="#handleStart" text="Start" styleClass="buttons"/>
+                <Button fx:id="stopButton" onAction="#handleStop" text="Stop" styleClass="buttons"/>
+                <Button fx:id="backButton" onAction="#handleBackButton" text="Back" styleClass="buttons"/>
             </HBox>
         </VBox>
         <TextArea fx:id="logArea" editable="false" prefHeight="150" prefWidth="400" wrapText="true" />
