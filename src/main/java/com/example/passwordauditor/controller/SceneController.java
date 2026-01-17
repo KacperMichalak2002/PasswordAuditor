@@ -54,4 +54,19 @@ public class SceneController {
     public void switchToMainView(ActionEvent event) throws IOException{
         switchScene(event, "/com/example/passwordauditor/view/MainView.fxml");
     }
+
+    public void switchToDictionaryAttackView(ActionEvent event, String password) throws IOException {
+        String fxmlFile = "/com/example/passwordauditor/view/DictionaryAttackWindow.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        root = loader.load();
+
+        DictionaryAttackController dictionaryAttackController = loader.getController();
+        dictionaryAttackController.setTargetPassword(password);
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        closeStage(stage);
+        stage.show();
+    }
 }

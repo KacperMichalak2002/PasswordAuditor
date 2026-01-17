@@ -5,6 +5,7 @@ module com.example.passwordauditor {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires javafx.graphics;
+    requires javafx.base;
 
     opens com.example.passwordauditor to javafx.fxml;
     opens com.example.passwordauditor.controller to javafx.fxml;

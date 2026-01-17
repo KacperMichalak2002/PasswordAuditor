@@ -42,7 +42,7 @@
 
     <HBox alignment="CENTER" spacing="20">
         <Button fx:id="bruteForceButton" onAction="#handleOpenNewWindowBruteForce" styleClass="buttons" text="Brute Force" />
-        <Button fx:id="dictionaryButton" styleClass="buttons" text="Dictionary Method" />
+        <Button fx:id="dictionaryButton" onAction="#handleOpenNewWindowDictionary" styleClass="buttons" text="Dictionary Method" />
     </HBox>
 
 </VBox>

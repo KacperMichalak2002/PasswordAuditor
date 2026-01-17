@@ -140,6 +140,15 @@ public class MainViewController {
         }
     }
 
+    @FXML
+    public void handleOpenNewWindowDictionary(ActionEvent event){
+        try{
+            sceneController.switchToDictionaryAttackView(event, passwordField.getText());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
 
 

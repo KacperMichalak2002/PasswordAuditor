@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.passwordauditor.controller.DictionaryAttackController"
+            prefHeight="400.0" prefWidth="600.0"
+            styleClass="mainContainer"
+            stylesheets="@../css/styles.css">
+
+
+    <VBox alignment="CENTER" spacing="10" styleClass="mainTitle">
+        <Label text="Password Auditor" />
+        <Label text="Test dictionary attack" />
+    </VBox>
+
+    <VBox maxWidth="600" spacing="15">
+        <Label text="Input your password for test" />
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <PasswordField fx:id="targetPassword" promptText="Input password" HBox.hgrow="ALWAYS" />
+        </HBox>
+
+        <VBox maxWidth="600" spacing="10">
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="startButton" onAction="#handleStart" text="Start" />
+                <Button fx:id="stopButton" onAction="#handleStop" text="Stop" />
+                <Button fx:id="backButton" onAction="#handleBackButton" text="Back" />
+            </HBox>
+        </VBox>
+        <TextArea fx:id="logArea" editable="false" prefHeight="150" prefWidth="400" wrapText="true" />
+    </VBox>
+</VBox>
