@@ -1,5 +1,7 @@
 package com.example.passwordauditor.controller;
 
+import com.example.passwordauditor.service.DictionaryAttack;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -23,6 +25,9 @@ public class DictionaryAttackController {
     @FXML
     private Button backButton;
 
+    private DictionaryAttack dictionaryAttackTask;
+    private Thread dictionaryAttackThread;
+
     @FXML
     public void initialize(){
         stopButton.setDisable(true);
@@ -30,11 +35,50 @@ public class DictionaryAttackController {
     @FXML
     private void handleStart(){
 
+        String password = targetPassword.getText();
+
+        if(password == null || password.isEmpty()){
+            return;
+        }
+
+        logArea.clear();
+
+        dictionaryAttackTask = new DictionaryAttack(password);
+
+        dictionaryAttackTask.messageProperty().addListener((observable, oldMsg, newMsg) ->{
+            Platform.runLater(() -> {
+                logArea.appendText(newMsg + "\n");
+                logArea.setScrollTop(Double.MAX_VALUE);
+            });
+        });
+
+        dictionaryAttackTask.setOnSucceeded(e ->{
+            String result = dictionaryAttackTask.getValue();
+            showAlert("Success", result);
+            resetButtons();
+        });
+
+        dictionaryAttackTask.setOnCancelled(e ->{
+            logArea.appendText("Test canceled by user \n");
+            resetButtons();
+        });
+
+        dictionaryAttackTask.setOnFailed(e ->{
+            showAlert("Error","Attack failed: " + dictionaryAttackTask.getException().getMessage());
+            resetButtons();
+        });
+
+        dictionaryAttackThread = new Thread(dictionaryAttackTask);
+        dictionaryAttackThread.setDaemon(true);
+        dictionaryAttackThread.start();
+
     }
 
     @FXML
     private void handleStop(){
-
+        if(dictionaryAttackTask != null){
+            dictionaryAttackTask.cancel();
+        }
     }
 
 
