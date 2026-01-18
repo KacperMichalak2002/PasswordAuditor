@@ -9,14 +9,14 @@
 <VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.passwordauditor.controller.DictionaryAttackController"
-            prefHeight="400.0" prefWidth="600.0"
+            prefHeight="600.0" prefWidth="700.0"
             styleClass="mainContainer"
             stylesheets="@../css/styles.css">
 
 
     <VBox alignment="CENTER" spacing="10" styleClass="mainTitle">
-        <Label text="Password Auditor" />
-        <Label text="Test dictionary attack" />
+        <Label text="Password Auditor" styleClass="titleHeader" />
+        <Label text="Test dictionary attack" styleClass="secondTitleHeader" />
     </VBox>
 
     <VBox maxWidth="600" spacing="15">

@@ -1,6 +1,7 @@
 package com.example.passwordauditor.controller;
 
 import com.example.passwordauditor.service.DictionaryAttack;
+import com.example.passwordauditor.utils.CustomAlert;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,7 +55,7 @@ public class DictionaryAttackController {
 
         dictionaryAttackTask.setOnSucceeded(e ->{
             String result = dictionaryAttackTask.getValue();
-            showAlert("Success", result);
+            CustomAlert.showAlert("Success", result);
             resetButtons();
         });
 
@@ -64,7 +65,7 @@ public class DictionaryAttackController {
         });
 
         dictionaryAttackTask.setOnFailed(e ->{
-            showAlert("Error","Attack failed: " + dictionaryAttackTask.getException().getMessage());
+            CustomAlert.showAlert("Error","Attack failed: " + dictionaryAttackTask.getException().getMessage());
             resetButtons();
         });
 
@@ -79,15 +80,6 @@ public class DictionaryAttackController {
         if(dictionaryAttackTask != null){
             dictionaryAttackTask.cancel();
         }
-    }
-
-
-    private void showAlert(String title, String information) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(information);
-        alert.showAndWait();
     }
 
     private void resetButtons() {

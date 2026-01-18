@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="600.0" spacing="20" styleClass="mainContainer" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.passwordauditor.controller.MainViewController">
+<VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="700.0" spacing="20" styleClass="mainContainer" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.passwordauditor.controller.MainViewController">
 
     <VBox alignment="CENTER" spacing="10" styleClass="mainTitle">
-        <Label text="Password Auditor" />
-        <Label text="Check your password's strength" />
+        <Label text="Password Auditor" styleClass="titleHeader" />
+        <Label text="Check your password's strength" styleClass="secondTitleHeader" />
     </VBox>
 
     <!-- Input -->

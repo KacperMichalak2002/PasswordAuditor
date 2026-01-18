@@ -1,6 +1,7 @@
 package com.example.passwordauditor.controller;
 
 import com.example.passwordauditor.service.BruteForceAttack;
+import com.example.passwordauditor.utils.CustomAlert;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,16 +57,16 @@ public class BruteForceController {
             String result = bruteForceTask.getValue();
 
             if(result != null){
-                showAlert("Success","Password found: " + result);
+                CustomAlert.showAlert("Success","Password found: " + result);
             }else {
-                showAlert("Result","Password not found");
+                CustomAlert.showAlert("Result","Password not found");
             }
 
             resetButtons();
         });
 
         bruteForceTask.setOnFailed(e ->{
-            showAlert("Error", "Attack failed: " + bruteForceTask.getException().getMessage());
+            CustomAlert.showAlert("Error", "Attack failed: " + bruteForceTask.getException().getMessage());
             resetButtons();
         });
 
@@ -91,14 +92,6 @@ public class BruteForceController {
             bruteForceTask.cancel();
             logArea.appendText("Stopping test...\n");
         }
-    }
-
-    private void showAlert(String title, String information) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(information);
-        alert.showAndWait();
     }
 
     private void resetButtons() {

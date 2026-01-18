@@ -3,6 +3,7 @@ package com.example.passwordauditor.controller;
 import com.example.passwordauditor.model.PasswordAnalysis;
 import com.example.passwordauditor.service.HIBPChecker;
 import com.example.passwordauditor.service.PasswordAnalyzer;
+import com.example.passwordauditor.utils.CustomAlert;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,6 @@ public class MainViewController {
     private static final SceneController sceneController = new SceneController();
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private Label passwordStrengthLabel;
     @FXML
@@ -48,6 +48,7 @@ public class MainViewController {
         analysisHBox.setVisible(false);
         bruteForceButton.setDisable(true);
         dictionaryButton.setDisable(true);
+        checkButton.setDisable(true);
     }
 
     private void passwordInputListener(){
@@ -70,6 +71,7 @@ public class MainViewController {
         analysisHBox.setVisible(true);
         bruteForceButton.setDisable(false);
         dictionaryButton.setDisable(false);
+        checkButton.setDisable(false);
     }
 
     private void updateProgressBar(PasswordAnalysis passwordAnalysis){
@@ -105,12 +107,6 @@ public class MainViewController {
     private void updateAnalysis(PasswordAnalysis passwordAnalysis){
         analysisVBox.getChildren().clear();
 
-        Label titleLabel = new Label("Password Analysis:");
-        analysisVBox.getChildren().add(titleLabel);
-
-        Label lengthLabel = new Label("Length: " + passwordAnalysis.getLength());
-        analysisVBox.getChildren().add(lengthLabel);
-
         for(String info : passwordAnalysis.getListOfStrengths()){
             Label infoLabel = new Label(info);
             infoLabel.getStyleClass().add("strengthsLabel");
@@ -132,14 +128,7 @@ public class MainViewController {
         analysisHBox.setVisible(false);
         bruteForceButton.setDisable(true);
         dictionaryButton.setDisable(true);
-    }
-
-    private void showAlert(String title, String information) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(information);
-        alert.showAndWait();
+        checkButton.setDisable(true);
     }
 
     @FXML
@@ -165,9 +154,9 @@ public class MainViewController {
         hibpChecker.checkPasswordLeak(passwordField.getText()).thenAccept(leakCount ->{
             Platform.runLater(() ->{
                 if(leakCount > 0){
-                    showAlert("Password Leaked",String.format("Password leaked %d times", leakCount));
+                    CustomAlert.showAlert("Password Leaked",String.format("Password leaked %d times", leakCount));
                 }else if(leakCount == 0){
-                    showAlert("Safe","Password wasn't found");
+                    CustomAlert.showAlert("Safe","Password wasn't found");
                 }
             });
 
